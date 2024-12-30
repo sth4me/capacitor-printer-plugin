@@ -28,9 +28,9 @@ public class USBPrinterConstant {
 
         STYLE_LIST.put("BOLD_FONT",new byte[] {(byte) 27, (byte) 69, (byte) 1});
         STYLE_LIST.put("BOLD_FONT_OFF",new byte[] {(byte) 27, (byte) 69, (byte) 0});
-        STYLE_LIST.put("CHARSET_CHINA",new byte[] {(byte) 27, (byte) 82, (byte) 15});
 
         // reset the styling commands that are already set
+        COMMAND_LIST.put("CHARSET_CHINA",new byte[] {(byte) 27, (byte) 82, (byte) 15});
         COMMAND_LIST.put("RESET", new byte[] {(byte) 27, (byte) 64});
         COMMAND_LIST.put("PARTIAL_CUT", new byte[] {(byte) 27, (byte) 105});
         COMMAND_LIST.put("FULL_CUT", new byte[] {(byte) 27, (byte) 109});
