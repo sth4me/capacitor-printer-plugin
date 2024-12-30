@@ -1,6 +1,6 @@
 {
   "name": "capacitor-printer-plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Capacitor Printer Plugin For Android",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",

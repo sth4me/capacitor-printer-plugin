@@ -85,11 +85,10 @@ connectToPrinter(options: { productId: number; }) => Promise<{ connected: boolea
 
 #### PrintResponse
 
-| Prop             | Type                |
-| ---------------- | ------------------- |
-| **`message`**    | <code>string</code> |
-| **`content`**    | <code>string</code> |
-| **`debug_logs`** | <code>string</code> |
+| Prop          | Type                |
+| ------------- | ------------------- |
+| **`message`** | <code>string</code> |
+| **`content`** | <code>string</code> |
 
 
 #### PrintOptions
