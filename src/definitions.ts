@@ -14,7 +14,6 @@ export interface PrintOptions {
 export interface PrintResponse {
     message: string,
     content: string,
-    debug_logs?: string
 }
 
 export interface USBPrinterInfo {
