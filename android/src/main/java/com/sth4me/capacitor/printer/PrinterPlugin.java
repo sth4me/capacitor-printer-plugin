@@ -1,17 +1,5 @@
 package com.sth4me.capacitor.printer;
 
-import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.graphics.pdf.PdfDocument;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Base64;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
@@ -21,13 +9,6 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 
 import org.json.JSONArray;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-
-import android.util.Base64;
 
 @CapacitorPlugin(name = "Printer")
 public class PrinterPlugin extends Plugin {
