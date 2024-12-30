@@ -137,6 +137,7 @@ public class USBPrinter {
 
         for(USBPrinterLineEntry lineEntry: printObjectList) {
             connection.bulkTransfer(usbEndpoint, RESET, RESET.length, 10000);
+            connection.bulkTransfer(usbEndpoint, USBPrinterConstant.COMMAND_LIST.get("CHARSET_CHINA"), USBPrinterConstant.COMMAND_LIST.get("CHARSET_CHINA").length, 10000);
             if(lineEntry.getLineStyleList() != null) {
                 for(String style: lineEntry.getLineStyleList()) {
                     byte[] styleValue = USBPrinterConstant.STYLE_LIST.get(style);
