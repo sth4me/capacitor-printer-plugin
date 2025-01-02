@@ -53,6 +53,17 @@ public class PrinterPlugin extends Plugin {
     }
 
     @PluginMethod
+    public void getEncoding(PluginCall call) {
+        try {
+            JSObject jsObject = new JSObject();
+            jsObject.put("encoding", implementation.getEncoding());
+            call.resolve(jsObject);
+        } catch (Exception e) {
+            call.reject(e.getMessage());
+        }
+    }
+
+    @PluginMethod
     public void print(PluginCall call) {
         String printObject = call.getString("printObject");
         if (printObject == null || printObject.isEmpty()) {

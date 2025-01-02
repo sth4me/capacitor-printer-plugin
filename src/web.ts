@@ -1,6 +1,6 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type { PrinterPlugin, PrintOptions, PrintResponse, USBPrinterInfo } from './definitions';
+import type { PrinterPlugin, PrintOptions, PrintResponse, USBPrinterInfo, CharsetEncoding } from './definitions';
 
 export class PrinterPluginWeb extends WebPlugin implements PrinterPlugin {
   async echo(options: { value: string }): Promise<{ value: string }> {
@@ -29,6 +29,17 @@ export class PrinterPluginWeb extends WebPlugin implements PrinterPlugin {
       console.debug('connectToPrinter',options)
       return Promise.resolve({
         connected: false,
+        message: 'Web version of SumUp not available.'
+      })
+  }
+
+  async getEncoding() : Promise<{ encoding: CharsetEncoding; }> {
+      console.debug('getEncoding')
+      return Promise.resolve({
+        encoding: {
+          charsetName: '',
+          charsetCommond: new Uint8Array(0)
+        },
         message: 'Web version of SumUp not available.'
       })
   }

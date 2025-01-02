@@ -3,6 +3,7 @@ export interface PrinterPlugin {
   print(options: PrintOptions) : Promise<PrintResponse>;
   getPrinterList(): Promise<{ printerList: USBPrinterInfo[]; }>;
   connectToPrinter(options: { productId: number }): Promise<{ connected: boolean; }>;
+  getEncoding(): Promise<{ encoding: CharsetEncoding; }>;
 }
 
 
@@ -26,4 +27,9 @@ export interface USBPrinterLineEntry {
   lineText?: string;
   lineStyleList?: string[];
   lineCommandList?: string[];
+}
+
+export interface CharsetEncoding {
+  charsetName: string;
+  charsetCommond : Uint8Array;
 }

@@ -17,6 +17,10 @@ import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
 import android.util.Log;
 
+import com.dantsu.escposprinter.EscPosCharsetEncoding;
+import com.dantsu.escposprinter.EscPosPrinter;
+import com.dantsu.escposprinter.connection.DeviceConnection;
+import com.dantsu.escposprinter.connection.usb.UsbConnection;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -29,6 +33,7 @@ public class USBPrinter {
     private UsbEndpoint usbEndpoint;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private UsbDeviceConnection connection;
+    private DeviceConnection deviceConnection;
 
 
     public USBPrinter(Context context) {
@@ -36,6 +41,7 @@ public class USBPrinter {
         this.actionString = this.context.getPackageName() + ".USB_PERMISSION";
         this.manager =  (UsbManager) this.context.getSystemService(Context.USB_SERVICE);
         this.deviceList = new ArrayList<>();
+        this.deviceConnection = null;
     }
 
     public List<Map> getPrinterList() {
@@ -74,6 +80,20 @@ public class USBPrinter {
         return false;
     }
 
+
+    public EscPosCharsetEncoding getEncoding() {
+        try {
+            if (this.deviceConnection != null) {
+                EscPosPrinter printer = new EscPosPrinter(this.deviceConnection, 203,80f,48);
+                return  printer.getEncoding();
+            }
+        } catch (Exception e) {
+            Log.e("USBPrinter", "Failed to get encoding: " + e.getMessage());
+            return null;
+        }
+        return null;
+    }
+
     public boolean connectToPrinter(int productId) throws Exception {
         UsbDevice selectedDevice = null;
         Log.d("USBPrinter", "Attempting to connect to printer with product ID: " + productId);
@@ -96,10 +116,12 @@ public class USBPrinter {
             this.connection = this.manager.openDevice(selectedDevice);
             boolean connected = (this.connection != null);
             Log.d("USBPrinter", "Connection " + (connected ? "successful" : "failed"));
+            this.deviceConnection = new UsbConnection(this.manager, selectedDevice);
             return connected;
         } catch(Exception e) {
             Log.e("USBPrinter", "Failed to connect: " + e.getMessage());
             this.connection = null;
+            this.deviceConnection = null;
             throw new Exception("Failed to establish connection to device " + productId + " due to " + e.getMessage());
         }
     }
